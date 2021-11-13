@@ -15,4 +15,8 @@ public class Számológép {
     public boolean prím(int szám) {
         return prímTár.prím(szám);
     }
+
+    public String státusz() {
+        return prímTár.státusz();
+    }
 }

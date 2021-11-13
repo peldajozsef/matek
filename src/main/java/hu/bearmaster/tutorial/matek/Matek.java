@@ -17,6 +17,9 @@ public class Matek {
                         case "pe":
                             prímSzám(bits);
                             break;
+                        case "st":
+                            státusz();
+                            break;
                         case "exit":
                         case "quit":
                             return;
@@ -43,5 +46,9 @@ public class Matek {
 
     private static void prímSzámHasználat() {
         System.out.println("pe <szám>[ <szám>]...");
+    }
+
+    private static void státusz() {
+        System.out.println(számológép.státusz());
     }
 }
