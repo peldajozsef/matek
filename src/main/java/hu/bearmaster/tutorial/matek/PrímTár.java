@@ -17,10 +17,7 @@ public class PrímTár {
 
     public boolean prím(int szám) {
         int minimum = (int)Math.ceil(Math.sqrt(szám));
-        int utolsó = prímek.last();
-        if (utolsó < minimum) {
-            következőPrím(minimum);
-        }
+        generál(minimum);
 
         SortedSet<Integer> kisebbPrímek = prímek.headSet(szám);
         for (int prím : kisebbPrímek) {
