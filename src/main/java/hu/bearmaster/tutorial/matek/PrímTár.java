@@ -1,11 +1,11 @@
 package hu.bearmaster.tutorial.matek;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class PrímTár {
 
-    private final List<Integer> prímek = new ArrayList<>();
+    private final SortedSet<Integer> prímek = new TreeSet<>();
 
     public PrímTár() {
         this(100);
@@ -41,7 +41,7 @@ public class PrímTár {
     }
 
     private void generál(int maximum) {
-        Integer utolsó = prímek.get(prímek.size() - 1);
+        Integer utolsó = prímek.last();
 
         for(int i = utolsó + 2; i <= maximum; i += 2) {
             if (prím(i)) {
