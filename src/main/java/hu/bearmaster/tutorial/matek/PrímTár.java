@@ -16,6 +16,12 @@ public class PrímTár {
     }
 
     public boolean prím(int szám) {
+        int minimum = (int)Math.ceil(Math.sqrt(szám));
+        int utolsó = prímek.get(prímek.size() - 1);
+        if (utolsó < minimum) {
+            következőPrím(minimum);
+        }
+
         for (int prím : prímek) {
            if (szám % prím == 0) {
                return szám == prím;
@@ -32,6 +38,10 @@ public class PrímTár {
         }
         generál(szám * 2 + 1);
         return következőPrím(szám);
+    }
+
+    public String státusz() {
+        return String.format("Méret: %d%nUtolsó: %d", prímek.size(), prímek.get(prímek.size() - 1));
     }
 
     private void init(int maximum) {
