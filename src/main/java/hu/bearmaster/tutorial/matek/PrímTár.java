@@ -16,9 +16,10 @@ public class PrímTár {
     }
 
     public boolean prím(int szám) {
-        for (int prím : prímek) {
+        SortedSet<Integer> kisebbPrímek = prímek.headSet(szám);
+        for (int prím : kisebbPrímek) {
            if (szám % prím == 0) {
-               return szám == prím;
+               return false;
            }
         }
         return true;
