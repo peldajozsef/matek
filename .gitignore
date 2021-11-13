@@ -1,0 +1,7 @@
+# Build fájlok
+target/
+
+# Rejtett fájlok
+.*
+!.gitignore
+*.iml
