@@ -1,5 +1,10 @@
 package hu.bearmaster.tutorial.matek;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Számológép {
 
     private final PrímTár prímTár;
@@ -32,6 +37,35 @@ public class Számológép {
         }
 
         return felbontás;
+    }
+
+    public int lnko(List<Integer> számok) {
+        if (számok.size() < 2) {
+            return -1;
+        }
+        List<PrímTényezősFelbontás> felbontások = new ArrayList<>();
+        for (int szám : számok) {
+            PrímTényezősFelbontás felbontás = prímFelbontás(szám);
+            felbontások.add(felbontás);
+        }
+        Set<Integer> közösPrímOsztók = new HashSet<>(felbontások.get(0).prímek());
+
+        for (PrímTényezősFelbontás felbontás : felbontások) {
+            közösPrímOsztók.retainAll(felbontás.prímek());
+        }
+
+        PrímTényezősFelbontás lnkoFelbontás = new PrímTényezősFelbontás();
+
+        for (int prím : közösPrímOsztók) {
+            int kitevő = Integer.MAX_VALUE;
+            for (PrímTényezősFelbontás felbontás : felbontások) {
+                int aktuálisKitevő = felbontás.getPrímTényező(prím).orElseThrow().getKitevő();
+                kitevő = aktuálisKitevő < kitevő ? aktuálisKitevő : kitevő;
+            }
+            lnkoFelbontás.setPrímTényező(new PrímTényező(prím, kitevő));
+        }
+
+        return lnkoFelbontás.érték();
     }
 
     public String státusz() {

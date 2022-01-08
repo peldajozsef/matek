@@ -1,6 +1,10 @@
 package hu.bearmaster.tutorial.matek;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+
+import static java.util.stream.Collectors.toList;
 
 public class Matek {
 
@@ -23,6 +27,9 @@ public class Matek {
                             break;
                         case "pt":
                             prímTényezők(bits);
+                            break;
+                        case "lnko":
+                            lnko(bits);
                             break;
                         case "exit":
                         case "quit":
@@ -68,6 +75,21 @@ public class Matek {
 
     private static void prímTényezőkHasználat() {
         System.out.println("pt <szám>[ <szám>]...");
+    }
+
+    private static void lnko(String[] bits) {
+        if (bits.length < 3) {
+            System.out.println("Legalább két paraméter kötelező!");
+            lnkoHasználat();
+            return;
+        }
+        List<Integer> számok = Arrays.stream(bits).skip(1).map(Integer::parseInt).collect(toList());
+        int lnko = számológép.lnko(számok);
+        System.out.println(lnko);
+    }
+
+    private static void lnkoHasználat() {
+        System.out.println("lnko <szám> <szám>[ <szám>]...");
     }
 
     private static void státusz() {
