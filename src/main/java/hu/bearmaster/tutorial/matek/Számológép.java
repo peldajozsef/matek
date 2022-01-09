@@ -60,7 +60,7 @@ public class Számológép {
             int kitevő = Integer.MAX_VALUE;
             for (PrímTényezősFelbontás felbontás : felbontások) {
                 int aktuálisKitevő = felbontás.getPrímTényező(prím).orElseThrow().getKitevő();
-                kitevő = aktuálisKitevő < kitevő ? aktuálisKitevő : kitevő;
+                kitevő = Math.min(kitevő, aktuálisKitevő);
             }
             lnkoFelbontás.setPrímTényező(new PrímTényező(prím, kitevő));
         }
