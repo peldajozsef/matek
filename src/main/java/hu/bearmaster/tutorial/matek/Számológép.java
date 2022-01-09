@@ -59,12 +59,41 @@ public class Számológép {
             int kitevő = 0;
             for (PrímTényezősFelbontás felbontás : felbontások) {
                 int aktuálisKitevő = felbontás.getPrímTényező(prím);
-                kitevő = aktuálisKitevő > kitevő ? aktuálisKitevő : kitevő;
+                kitevő = Math.max(aktuálisKitevő, kitevő);
             }
             lkktFelbontás.setPrímTényező(prím, kitevő);
         }
 
         return lkktFelbontás.érték();
+    }
+
+    public int lnko(List<Integer> számok) {
+        if (számok.size() < 2) {
+            return -1;
+        }
+        List<PrímTényezősFelbontás> felbontások = new ArrayList<>();
+        for (int szám : számok) {
+            PrímTényezősFelbontás felbontás = prímFelbontás(szám);
+            felbontások.add(felbontás);
+        }
+        Set<Integer> közösPrímOsztók = new HashSet<>(felbontások.get(0).prímek());
+
+        for (PrímTényezősFelbontás felbontás : felbontások) {
+            közösPrímOsztók.retainAll(felbontás.prímek());
+        }
+
+        PrímTényezősFelbontás lnkoFelbontás = new PrímTényezősFelbontás();
+
+        for (int prím : közösPrímOsztók) {
+            int kitevő = Integer.MAX_VALUE;
+            for (PrímTényezősFelbontás felbontás : felbontások) {
+                int aktuálisKitevő = felbontás.getPrímTényező(prím);
+                kitevő = Math.min(kitevő, aktuálisKitevő);
+            }
+            lnkoFelbontás.setPrímTényező(prím, kitevő);
+        }
+
+        return lnkoFelbontás.érték();
     }
 
     public String státusz() {

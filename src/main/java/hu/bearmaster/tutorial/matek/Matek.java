@@ -31,6 +31,9 @@ public class Matek {
                         case "lkkt":
                             lkkt(bits);
                             break;
+                        case "lnko":
+                            lnko(bits);
+                            break;
                         case "exit":
                         case "quit":
                             return;
@@ -90,6 +93,21 @@ public class Matek {
 
     private static void lkktHasználat() {
         System.out.println("lkkt <szám> <szám>[ <szám>]...");
+    }
+
+    private static void lnko(String[] bits) {
+        if (bits.length < 3) {
+            System.out.println("Legalább két paraméter kötelező!");
+            lnkoHasználat();
+            return;
+        }
+        List<Integer> számok = Arrays.stream(bits).skip(1).map(Integer::parseInt).collect(toList());
+        int lnko = számológép.lnko(számok);
+        System.out.println(lnko);
+    }
+
+    private static void lnkoHasználat() {
+        System.out.println("lnko <szám> <szám>[ <szám>]...");
     }
 
     private static void státusz() {
