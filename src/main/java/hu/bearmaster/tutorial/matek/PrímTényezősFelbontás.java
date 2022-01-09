@@ -1,6 +1,5 @@
 package hu.bearmaster.tutorial.matek;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -11,12 +10,12 @@ public class PrímTényezősFelbontás {
 
     private final SortedMap<Integer, Integer> prímTényezők = new TreeMap<>();
 
-    public Optional<PrímTényező> getPrímTényező(int prím) {
-        return Optional.ofNullable(prímTényezők.get(prím)).map(kitevő -> new PrímTényező(prím, kitevő));
+    public int getPrímTényező(int prím) {
+        return prímTényezők.getOrDefault(prím, 0);
     }
 
-    public void setPrímTényező(PrímTényező tényező) {
-        prímTényezők.put(tényező.getPrím(), tényező.getKitevő());
+    public void setPrímTényező(int prím, int kitevő) {
+        prímTényezők.put(prím, kitevő);
     }
 
     public Set<Integer> prímek() {
